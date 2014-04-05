@@ -1,0 +1,32 @@
+{
+    "name": "dotblue/nette-control-rendering",
+    "description": "Multiple rendering modes for Control hierarchical structure with AJAX support.",
+    "type": "library",
+    "keywords": [
+        "rendering",
+        "control",
+        "nette"
+    ],
+    "license": ["BSD-3-Clause"],
+    "authors": [
+        {
+            "name": "Vojtěch Dobeš",
+            "homepage": "http://github.com/vojtech-dobes"
+        },
+        {
+            "name": "dotBlue",
+            "homepage": "http://dotblue.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/dotblue/nette-control-rendering/issues",
+        "source": "https://github.com/dotblue/nette-control-rendering"
+    },
+    "require": {
+        "php": ">=5.4",
+        "nette/nette": "~2.1.0"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}

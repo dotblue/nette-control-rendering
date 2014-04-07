@@ -12,7 +12,7 @@ class Wrapper
 	/** @var UI\PresenterComponent */
 	private $component;
 
-	/** @var string */
+	/** @var string[]|string */
 	private $renderMode;
 
 	/** @var {UI\Control|UI\Multiplier}[] */

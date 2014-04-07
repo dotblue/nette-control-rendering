@@ -15,7 +15,7 @@ class Renderer extends UI\Control
 	/** @var UI\Control */
 	private $control;
 
-	/** @var string */
+	/** @var string[]|string */
 	private $renderMode;
 
 	/** @var Wrapper */
@@ -37,12 +37,9 @@ class Renderer extends UI\Control
 		$template = $this->control->getTemplate();
 		$template->_control = $template->control = $this;
 
-		$method = 'render' . ucfirst($this->renderMode);
-		if ($this->renderMode === self::DEFAULT_MODE || !method_exists($this->control, $method)) {
-			return $this->control->render();
-		} else {
-			return $this->control->$method();
-		}
+		$mode = $this->determineRenderMode($this->control, $this->renderMode);
+		$method = $this->formatRenderMethod($mode);
+		return $this->control->$method();
 	}
 
 
@@ -57,6 +54,33 @@ class Renderer extends UI\Control
 	public function getComponents($deep = FALSE, $filterType = NULL)
 	{
 		return $this->wrapper->getComponents($deep, $filterType);
+	}
+
+
+
+	/**
+	 * Checks if method render*Mode* exists and returns first matched mode.
+	 *
+	 * @param  UI\Control
+	 * @param  string[]|string
+	 * @return string
+	 */
+	private function determineRenderMode($control, $modes)
+	{
+		foreach (is_array($modes) ? $modes : [$modes] as $mode) {
+			if (method_exists($control, $this->formatRenderMethod($mode))) {
+				return $mode;
+			}
+		}
+
+		return self::DEFAULT_MODE;
+	}
+
+
+
+	private function formatRenderMethod($mode)
+	{
+		return 'render' . ucfirst($mode);
 	}
 
 

@@ -80,7 +80,7 @@ class Renderer extends UI\Control
 
 	private function formatRenderMethod($mode)
 	{
-		return 'render' . ucfirst($mode);
+		return 'render' . ($mode === self::DEFAULT_MODE ? '' : ucfirst($mode));
 	}
 
 
